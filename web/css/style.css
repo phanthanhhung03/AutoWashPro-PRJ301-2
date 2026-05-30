@@ -1324,10 +1324,12 @@ body::after {
 .tier-card {
     padding: var(--spacing-xl);
     border-radius: var(--radius-xl);
+    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 420px;
+    
+    min-height: 380px;
     position: relative;
 }
 
@@ -1337,7 +1339,7 @@ body::after {
 }
 
 .tier-card--popular::after {
-    content: 'POPULAR';
+    content: 'MOST POPULAR';
     position: absolute;
     top: 15px;
     right: 15px;
@@ -1357,7 +1359,7 @@ body::after {
 }
 
 .tier-card--vip::after {
-    content: 'ULTIMATE VIP';
+    content: 'PREMIUM';
     position: absolute;
     top: 15px;
     right: 15px;

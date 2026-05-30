@@ -8,6 +8,8 @@ package dto;
  *
  * @author Admin
  */
+package dto;
+
 public class CustomerTier {
 
     private int tierID;
