@@ -35,12 +35,24 @@
                 <h1 class="auth-card__title">Welcome Back</h1>
                 <p class="auth-card__desc">Sign in to manage bookings, track loyalty points, and review premium washes.</p>
 
+                <% if (request.getAttribute("ERROR") != null) { %>
+                    <div style="color: #d93025; background-color: #fce8e6; padding: 10px; margin-bottom: 15px; border-radius: 6px; text-align: center; border: 1px solid #fad2cf; font-weight: 500;">
+                        <%= request.getAttribute("ERROR") %>
+                    </div>
+                <% } %>
+                
                 <form action="MainController" method="POST">
                     <!-- Email field -->
                     <div class="form-group">
                         <label for="email" class="form-group__label">Email Address</label>
                         <div class="form-group__input-wrapper">
-                            <input type="email" id="email" class="form-group__input" placeholder="name@domain.com" required autocomplete="email" name="email">
+                            <input type="email" id="email" class="form-group__input" placeholder="name@domain.com" 
+                                   required autocomplete="email" name="email"
+                                   maxlength="50" 
+                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                   title="Vui lòng nhập đúng định dạng email (vd: nguyen@gmail.com)"
+                                   oninvalid="this.setCustomValidity('Xin vui lòng nhập đúng định dạng Email!')"
+                                   oninput="this.setCustomValidity('')">
                         </div>
                     </div>
 
@@ -48,7 +60,12 @@
                     <div class="form-group">
                         <label for="password" class="form-group__label">Password</label>
                         <div class="form-group__input-wrapper">
-                            <input type="password" id="password" class="form-group__input" placeholder="••••••••" required autocomplete="current-password" name="password">
+                            <input type="password" id="password" class="form-group__input" placeholder="••••••••" 
+                                   required autocomplete="current-password" name="password"
+                                   minlength="6" maxlength="20"
+                                   title="Mật khẩu phải từ 6 đến 20 ký tự"
+                                   oninvalid="this.setCustomValidity('Xin vui lòng nhập mật khẩu tối thiểu 6 ký tự!')"
+                                   oninput="this.setCustomValidity('')">
                         </div>
                     </div>
 
