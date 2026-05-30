@@ -28,7 +28,7 @@
         <main class="main-wrapper main-wrapper--narrow">
             <div class="auth-card glass-panel">
 
-                <a href="index.jsp" class="auth-card__logo">
+                <a href="customer/landing-page.jsp" class="auth-card__logo">
                     <div class="site-header__logo-icon"></div>
                 </a>
 
