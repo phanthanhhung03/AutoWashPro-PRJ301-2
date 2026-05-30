@@ -28,11 +28,11 @@
                     <a href="#features" class="site-header__nav-link">Features</a>
                     <a href="#workflow" class="site-header__nav-link">How It Works</a>
                     <a href="#membership" class="site-header__nav-link">Membership</a>
-                    <a href="#testimonials" class="site-header__nav-link">Testimonials</a>
+                    <a href="#testimonials" class="site-header__nav-link">Feedback</a>
                 </nav>
                 <div class="site-header__actions">
                     <a href="${pageContext.request.contextPath}/MainController?action=signin" class="btn btn--secondary btn--sm">Sign In</a>
-                    <a href="customer/signup.jsp" class="btn btn--primary btn--sm">Sign Up</a>
+                    <a href="${pageContext.request.contextPath}/MainController?action=signup" class="btn btn--primary btn--sm">Sign Up</a>
                 </div>
             </div>
         </header>
@@ -48,7 +48,7 @@
                     Experience a high-end car wash platform with smart vehicle scheduling, interactive loyalty point tier rewards, and precision cleaning techniques.
                 </p>
                 <div class="hero-section__actions">
-                    <a href="customer/signup.jsp" class="btn btn--gold">Explore Memberships</a>
+                    <a href="${pageContext.request.contextPath}/MainController?action=signup" class="btn btn--gold">Explore Memberships</a>
                     <a href="#features" class="btn btn--secondary">Learn More</a>
                 </div>
             </div>
@@ -82,10 +82,15 @@
                     <!-- Feature 3 -->
                     <div class="feature-card glass-panel">
                         <div class="feature-card__icon-wrapper">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M5 17h14l1-5-2-4H6L4 12l1 5z"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <circle cx="17" cy="17" r="2"/>
+                            </svg>
                         </div>
-                        <h3 class="feature-card__title">Japanese Nano-Tech</h3>
-                        <p class="feature-card__desc">We employ specialized Japanese-developed ceramic sealants and microfiber technology to shield and polish your vehicle.</p>
+                        <h3 class="feature-card__title">Vehicle Management</h3>
+                        <p class="feature-card__desc">Keep all your vehicles organized in one place. Manage vehicle information, booking records, and service history effortlessly.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -130,52 +135,89 @@
                     <h2 class="section-header__title">Select Your Membership Level</h2>
                     <p class="section-header__desc">Unlock high-end benefits, points-multipliers, and dedicated service bays.</p>
                 </div>
-                <div class="grid-cols-3">
-                    <!-- Tier 1 -->
+                <div class="grid-cols-4">
+
+                    <!-- Member -->
                     <div class="tier-card glass-panel">
                         <div class="tier-card__header">
-                            <h3 class="tier-card__name">Elite Club</h3>
-                            <div class="tier-card__price">$49<span>/mo</span></div>
+                            <h3 class="tier-card__name">Member</h3>
+                            <div class="tier-card__price">Starter<span> Tier</span></div>
                         </div>
+
                         <ul class="tier-card__list">
-                            <li class="tier-card__item">4 Express Washes per month</li>
-                            <li class="tier-card__item">1.2x Loyalty point multiplier</li>
-                            <li class="tier-card__item">Free vacuum self-service</li>
-                            <li class="tier-card__item">Email booking priority</li>
+                            <li class="tier-card__item">Earn loyalty points on every wash</li>
+                            <li class="tier-card__item">Access online booking system</li>
+                            <li class="tier-card__item">Manage vehicles in one place</li>
+                            <li class="tier-card__item">Track booking history</li>
                         </ul>
-                        <a href="customer/signup.jsp" class="btn btn--secondary btn--block">Join Elite Club</a>
+
+                        <a href="${pageContext.request.contextPath}/MainController?action=signup"
+                           class="btn btn--secondary btn--block">
+                            Get Started
+                        </a>
                     </div>
-                    <!-- Tier 2 (Popular) -->
+
+                    <!-- Silver -->
+                    <div class="tier-card glass-panel">
+                        <div class="tier-card__header">
+                            <h3 class="tier-card__name">Silver</h3>
+                            <div class="tier-card__price">5 Washes<span> / 2M VND</span></div>
+                        </div>
+
+                        <ul class="tier-card__list">
+                            <li class="tier-card__item">+10% Loyalty Point Bonus</li>
+                            <li class="tier-card__item">Priority Booking Access</li>
+                            <li class="tier-card__item">Exclusive Member Promotions</li>
+                            <li class="tier-card__item">Faster Service Queue</li>
+                        </ul>
+
+                        <a href="${pageContext.request.contextPath}/MainController?action=signup"
+                           class="btn btn--secondary btn--block">
+                            Join Silver
+                        </a>
+                    </div>
+
+                    <!-- Gold -->
                     <div class="tier-card tier-card--popular glass-panel">
                         <div class="tier-card__header">
-                            <h3 class="tier-card__name">Signature Detailing</h3>
-                            <div class="tier-card__price">$99<span>/mo</span></div>
+                            <h3 class="tier-card__name">Gold</h3>
+                            <div class="tier-card__price">15 Washes<span> / 6M VND</span></div>
                         </div>
+
                         <ul class="tier-card__list">
-                            <li class="tier-card__item">8 Premium Ceramic Washes</li>
-                            <li class="tier-card__item">1.5x Loyalty point multiplier</li>
-                            <li class="tier-card__item">Full interior cabin detailing</li>
-                            <li class="tier-card__item">SMS slot alerts & easy reschedule</li>
-                            <li class="tier-card__item">1 Ceramic nano-sealant coating</li>
+                            <li class="tier-card__item">+20% Loyalty Point Bonus</li>
+                            <li class="tier-card__item">Higher Booking Priority</li>
+                            <li class="tier-card__item">Monthly Service Upgrade</li>
+                            <li class="tier-card__item">Exclusive Gold Rewards</li>
                         </ul>
-                        <a href="customer/signup.jsp" class="btn btn--primary btn--block">Join Signature</a>
+
+                        <a href="${pageContext.request.contextPath}/MainController?action=signup"
+                           class="btn btn--primary btn--block">
+                            Join Gold
+                        </a>
                     </div>
-                    <!-- Tier 3 (VIP Gold) -->
+
+                    <!-- Platinum -->
                     <div class="tier-card tier-card--vip glass-panel">
                         <div class="tier-card__header">
-                            <h3 class="tier-card__name">VIP Shogun</h3>
-                            <div class="tier-card__price">$199<span>/mo</span></div>
+                            <h3 class="tier-card__name">Platinum</h3>
+                            <div class="tier-card__price">30 Washes<span> / 15M VND</span></div>
                         </div>
+
                         <ul class="tier-card__list">
-                            <li class="tier-card__item">Unlimited Washes & Detailing</li>
-                            <li class="tier-card__item">2.0x Loyalty point multiplier</li>
-                            <li class="tier-card__item">Dedicated Shogun wash bay access</li>
-                            <li class="tier-card__item">Engine bay steam cleaning</li>
-                            <li class="tier-card__item">Free luxury lounge access</li>
-                            <li class="tier-card__item">Quarterly graphene armor polish</li>
+                            <li class="tier-card__item">+30% Loyalty Point Bonus</li>
+                            <li class="tier-card__item">Highest Booking Priority</li>
+                            <li class="tier-card__item">Free Monthly Wash</li>
+                            <li class="tier-card__item">Premium VIP Benefits</li>
+                            <li class="tier-card__item">Exclusive Promotions & Rewards</li>
                         </ul>
-                        <a href="customer/signup.jsp" class="btn btn--gold btn--block">Join VIP Shogun</a>
+
+                        <a href="${pageContext.request.contextPath}/MainController?action=signup"
+                           class="btn btn--gold btn--block">
+                            Join Platinum
+                        </a>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -192,13 +234,13 @@
                     <!-- Testimonial 1 -->
                     <div class="testimonial-card glass-panel">
                         <p class="testimonial-card__quote">
-                            "The VIP Shogun lounge is top-tier. I can get work done while my Porsche receives pristine ceramic coat treatment. Pure efficiency."
+                            "The Platinum Member lounge is top-tier. I can get work done while my Porsche receives pristine ceramic coat treatment. Pure efficiency."
                         </p>
                         <div class="testimonial-card__author">
                             <div class="testimonial-card__avatar testimonial-card__avatar--vip">TK</div>
                             <div class="testimonial-card__meta">
                                 <span class="testimonial-card__name">Takahiro K.</span>
-                                <span class="testimonial-card__tier">VIP Shogun</span>
+                                <span class="testimonial-card__tier">Platinum Member</span>
                             </div>
                         </div>
                     </div>
@@ -211,7 +253,7 @@
                             <div class="testimonial-card__avatar">SM</div>
                             <div class="testimonial-card__meta">
                                 <span class="testimonial-card__name">Sarah M.</span>
-                                <span class="testimonial-card__tier testimonial-card__tier--standard">Signature Member</span>
+                                <span class="testimonial-card__tier testimonial-card__tier--standard">Gold Member</span>
                             </div>
                         </div>
                     </div>
@@ -224,7 +266,7 @@
                             <div class="testimonial-card__avatar">DL</div>
                             <div class="testimonial-card__meta">
                                 <span class="testimonial-card__name">David L.</span>
-                                <span class="testimonial-card__tier testimonial-card__tier--standard">Elite Member</span>
+                                <span class="testimonial-card__tier testimonial-card__tier--standard">Silver Member</span>
                             </div>
                         </div>
                     </div>
@@ -238,7 +280,7 @@
                 <div class="cta-card glass-panel">
                     <h2 class="cta-card__title">Elevate Your Automotive Care</h2>
                     <p class="cta-card__desc">Join thousands of members who enjoy premium, hassle-free detailing services on demand.</p>
-                    <a href="customer/signup.jsp" class="btn btn--primary">Get Started Now</a>
+                    <a href="${pageContext.request.contextPath}/MainController?action=signup" class="btn btn--primary">Get Started Now</a>
                 </div>
             </div>
         </section>
@@ -262,8 +304,8 @@
                     <div>
                         <h4 class="site-footer__section-title">Customer Care</h4>
                         <ul class="site-footer__list">
-                            <li><a href="customer/signin.jsp" class="site-footer__link">Sign In</a></li>
-                            <li><a href="customer/signup.jsp" class="site-footer__link">Sign Up</a></li>
+                            <li><a href="${pageContext.request.contextPath}/MainController?action=signin" class="site-footer__link">Sign In</a></li>
+                            <li><a href="${pageContext.request.contextPath}/MainController?action=signup" class="site-footer__link">Sign Up</a></li>
                             <li><a href="#" class="site-footer__link">Support Portal</a></li>
                         </ul>
                     </div>
