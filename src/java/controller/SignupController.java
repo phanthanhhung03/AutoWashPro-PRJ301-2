@@ -33,56 +33,56 @@ public class SignupController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-            String fullname        = request.getParameter("fullname");
-            String email           = request.getParameter("email");
-            String phone           = request.getParameter("phone");
-            String address         = request.getParameter("address");
-            String password        = request.getParameter("password");
-            String confirmPassword = request.getParameter("confirm-password");
 
-            //luu du~ lieu cu~ vao` req
-            request.setAttribute("oldFullName", fullname);
-            request.setAttribute("oldEmail", email);
-            request.setAttribute("oldPhone", phone);
-            request.setAttribute("oldAddress", address);
-            
-            Customer c = new Customer();
-            c.setFullName(fullname);
-            c.setPhoneNumber(phone);
-            c.setEmail(email);
-            c.setPassword(password);
-            c.setAddress(address);
-            
-            CustomerDAO dao = new CustomerDAO();
-            Customer check1 = dao.getCustomer(email);
-            Customer check2 = dao.getCustomer2(phone);
-            
-            // Kiểm tra trùng lặp Database
-            if (check1 != null) {
-                request.setAttribute("SIGNUP_ERROR", "true");
-                request.setAttribute("SIGNUP_ERROR_EMAIL", "Email này đã được đăng ký.");
-                request.getRequestDispatcher("/customer/signup.jsp").forward(request, response);
-            } else if (check2 != null) {
-                request.setAttribute("SIGNUP_ERROR", "true");
-                request.setAttribute("SIGNUP_ERROR_PHONE", "Số điện thoại này đã được đăng ký.");
-                request.getRequestDispatcher("/customer/signup.jsp").forward(request, response);
+        String fullname = request.getParameter("fullname");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirm-password");
+
+        //luu du~ lieu cu~ vao` req
+        request.setAttribute("oldFullName", fullname);
+        request.setAttribute("oldEmail", email);
+        request.setAttribute("oldPhone", phone);
+        request.setAttribute("oldAddress", address);
+
+        Customer c = new Customer();
+        c.setFullName(fullname);
+        c.setPhoneNumber(phone);
+        c.setEmail(email);
+        c.setPassword(password);
+        c.setAddress(address);
+
+        CustomerDAO dao = new CustomerDAO();
+        Customer check1 = dao.getCustomer(email);
+        Customer check2 = dao.getCustomer2(phone);
+
+        // Kiểm tra trùng lặp Database
+        if (check1 != null) {
+            request.setAttribute("SIGNUP_ERROR", "true");
+            request.setAttribute("SIGNUP_ERROR_EMAIL", "Email này đã được đăng ký.");
+            request.getRequestDispatcher("/customer/signup.jsp").forward(request, response);
+        } else if (check2 != null) {
+            request.setAttribute("SIGNUP_ERROR", "true");
+            request.setAttribute("SIGNUP_ERROR_PHONE", "Số điện thoại này đã được đăng ký.");
+            request.getRequestDispatcher("/customer/signup.jsp").forward(request, response);
+        } else {
+            int result = dao.createCustomer(c);
+            if (result >= 1) {
+                // Đăng ký thành công -> Xóa dữ liệu cũ đi để form trống trải, chuẩn bị cho lần đăng nhập
+                request.removeAttribute("oldFullName");
+                request.removeAttribute("oldEmail");
+                request.removeAttribute("oldPhone");
+                request.removeAttribute("oldAddress");
+                response.sendRedirect(request.getContextPath()
+                        + "/MainController?action=viewSignIn&registered=true");
             } else {
-                int result = dao.createCustomer(c);
-                if (result >= 1) {
-                    // Đăng ký thành công -> Xóa dữ liệu cũ đi để form trống trải, chuẩn bị cho lần đăng nhập
-                    request.removeAttribute("oldFullName");
-                    request.removeAttribute("oldEmail");
-                    request.removeAttribute("oldPhone");
-                    request.removeAttribute("oldAddress");
-                    response.sendRedirect(request.getContextPath()
-                            + "/MainController?action=viewSignIn&registered=true");
-                } else {
-                    request.setAttribute("SIGNUP_ERROR", "Lỗi hệ thống. Vui lòng thử lại sau.");
-                    request.getRequestDispatcher("/customer/signup.jsp").forward(request, response);
-                }
+                request.setAttribute("SIGNUP_ERROR", "Lỗi hệ thống. Vui lòng thử lại sau.");
+                request.getRequestDispatcher("/customer/signup.jsp").forward(request, response);
             }
-        
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -23,7 +23,7 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        
+
         if (action == null) {
             action = "/customer/landing-page";
         }
@@ -47,23 +47,23 @@ public class MainController extends HttpServlet {
             case "signIn":
                 url = "/SigninController";
                 break;
-                
+
             case "logout":
-                url = "/LogoutController"; 
+                url = "/LogoutController";
                 break;
-            
+
             case "signUp":
                 url = "SignupController";
                 break;
-                
+
             case "viewDashBoard":
                 url = "/customer/dashboard.jsp";
                 break;
-                
+
             case "viewAdminSignIn":
                 url = "/admin/admin-login.jsp";
                 break;
- 
+
             default:
                 url = "/customer/landing-page.jsp";
                 break;
