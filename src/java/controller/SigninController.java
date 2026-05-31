@@ -26,13 +26,6 @@ public class SigninController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
-            //  Kiểm tra rỗng hoặc toàn khoảng trắng
-            if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-                request.setAttribute("ERROR", "Vui lòng nhập đầy đủ Email và Mật khẩu!");
-                request.getRequestDispatcher("/customer/signin.jsp").forward(request, response);
-                return;
-            }
-
             // Dọn dẹp khoảng trắng dư thừa do copy/paste ở ô email
             email = email.trim();
 
@@ -43,12 +36,12 @@ public class SigninController extends HttpServlet {
             // XỬ LÝ ĐIỀU HƯỚNG
             if (customer == null) {
                 // Sai tài khoản/mật khẩu
-                request.setAttribute("ERROR", "Email hoặc mật khẩu không chính xác!");
+                request.setAttribute("ERROR", "Incorrect email or password!");
                 request.getRequestDispatcher("/customer/signin.jsp").forward(request, response);
 
             } else if (!customer.isStatus()) {
                 // Tài khoản bị khóa
-                request.setAttribute("ERROR", "Tài khoản của bạn đã bị vô hiệu hóa!");
+                request.setAttribute("ERROR", "Your account has been disabled!");
                 request.getRequestDispatcher("/customer/signin.jsp").forward(request, response);
 
             } else {
@@ -58,7 +51,7 @@ public class SigninController extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("ERROR", "Hệ thống đang bảo trì hoặc gặp sự cố. Vui lòng thử lại sau!");
+            request.setAttribute("ERROR", "The system is undergoing maintenance or experiencing technical issues. Please try again later!");
             request.getRequestDispatcher("/customer/signin.jsp").forward(request, response);
         }
     }
