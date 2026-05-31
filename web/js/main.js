@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
         inputEl.style.borderColor = '';
         var wrapper = inputEl.closest('.form-group');
         var existing = wrapper.querySelector('.field-error');
-        if (existing) existing.remove();
+        if (existing)
+            existing.remove();
     }
 
     function markValid(inputEl) {
@@ -44,72 +45,89 @@ document.addEventListener('DOMContentLoaded', function () {
     // ================================================================
     // BƯỚC 3: Rules validate cho từng field
     // ================================================================
-    var fnEl  = document.getElementById('fullname');
-    var phEl  = document.getElementById('phone');
-    var emEl  = document.getElementById('email');
-    var adEl  = document.getElementById('address');
-    var pwEl  = document.getElementById('password');
-    var cpEl  = document.getElementById('confirm-password');
+    var fnEl = document.getElementById('fullname');
+    var phEl = document.getElementById('phone');
+    var emEl = document.getElementById('email');
+    var adEl = document.getElementById('address');
+    var pwEl = document.getElementById('password');
+    var cpEl = document.getElementById('confirm-password');
 
     function validateFullname() {
         var val = fnEl.value.trim();
         if (!val) {
-            showError(fnEl, 'Họ tên không được để trống.'); return false;
+            showError(fnEl, 'Họ tên không được để trống.');
+            return false;
         }
         if (!/^[A-Za-zÀ-ỹ\s]{2,100}$/.test(val)) {
-            showError(fnEl, 'Họ tên chỉ gồm chữ cái, tối thiểu 2 ký tự.'); return false;
+            showError(fnEl, 'Họ tên chỉ gồm chữ cái, tối thiểu 2 ký tự.');
+            return false;
         }
-        markValid(fnEl); return true;
+        markValid(fnEl);
+        return true;
     }
 
     function validatePhone() {
         var val = phEl.value.trim();
         if (!val) {
-            showError(phEl, 'Số điện thoại không được để trống.'); return false;
+            showError(phEl, 'Số điện thoại không được để trống.');
+            return false;
         }
         if (!/^(0[35789])\d{8}$/.test(val)) {
-            showError(phEl, 'Số điện thoại không hợp lệ. Ví dụ: 0901234567'); return false;
+            showError(phEl, 'Số điện thoại không hợp lệ. Ví dụ: 0901234567');
+            return false;
         }
-        markValid(phEl); return true;
+        markValid(phEl);
+        return true;
     }
 
     function validateEmail() {
         var val = emEl.value.trim();
         if (!val) {
-            showError(emEl, 'Email không được để trống.'); return false;
+            showError(emEl, 'Email không được để trống.');
+            return false;
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            showError(emEl, 'Email không hợp lệ. Ví dụ: example@gmail.com'); return false;
+            showError(emEl, 'Email không hợp lệ. Ví dụ: example@gmail.com');
+            return false;
         }
-        markValid(emEl); return true;
+        markValid(emEl);
+        return true;
     }
 
     function validateAddress() {
         var val = adEl.value.trim();
         if (!val || val.length < 5) {
-            showError(adEl, 'Địa chỉ phải có ít nhất 5 ký tự.'); return false;
+            showError(adEl, 'Địa chỉ phải có ít nhất 5 ký tự.');
+            return false;
         }
-        markValid(adEl); return true;
+        markValid(adEl);
+        return true;
     }
 
     function validatePassword() {
         if (!pwEl.value) {
-            showError(pwEl, 'Mật khẩu không được để trống.'); return false;
+            showError(pwEl, 'Mật khẩu không được để trống.');
+            return false;
         }
         if (pwEl.value.length < 6) {
-            showError(pwEl, 'Mật khẩu phải có ít nhất 6 ký tự.'); return false;
+            showError(pwEl, 'Mật khẩu phải có ít nhất 6 ký tự.');
+            return false;
         }
-        markValid(pwEl); return true;
+        markValid(pwEl);
+        return true;
     }
 
     function validateConfirm() {
         if (!cpEl.value) {
-            showError(cpEl, 'Vui lòng xác nhận mật khẩu.'); return false;
+            showError(cpEl, 'Vui lòng xác nhận mật khẩu.');
+            return false;
         }
         if (cpEl.value !== pwEl.value) {
-            showError(cpEl, 'Mật khẩu xác nhận không khớp.'); return false;
+            showError(cpEl, 'Mật khẩu xác nhận không khớp.');
+            return false;
         }
-        markValid(cpEl); return true;
+        markValid(cpEl);
+        return true;
     }
 
     // ================================================================
@@ -127,7 +145,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Cập nhật pattern confirm theo password hiện tại
         var escaped = pwEl.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         cpEl.pattern = escaped;
-        if (cpEl.value) validateConfirm();
+        if (cpEl.value)
+            validateConfirm();
     });
 
     // ================================================================
@@ -138,19 +157,19 @@ document.addEventListener('DOMContentLoaded', function () {
         form.addEventListener('submit', function (e) {
             // Chạy tất cả validation cùng lúc
             var valid =
-                validateFullname() &
-                validatePhone()    &
-                validateEmail()    &
-                validateAddress()  &
-                validatePassword() &
-                validateConfirm();
+                    validateFullname() &
+                    validatePhone() &
+                    validateEmail() &
+                    validateAddress() &
+                    validatePassword() &
+                    validateConfirm();
 
             if (!valid) {
                 e.preventDefault(); // chặn submit
                 // Scroll đến lỗi đầu tiên
                 var firstError = form.querySelector('.field-error');
                 if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.scrollIntoView({behavior: 'smooth', block: 'center'});
                 }
             }
         });

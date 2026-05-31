@@ -19,7 +19,7 @@ public class SigninController extends HttpServlet {
     protected void processRequest(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
         try {
             String email = request.getParameter("email");
@@ -29,7 +29,7 @@ public class SigninController extends HttpServlet {
             if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
                 request.setAttribute("ERROR", "Vui lòng nhập đầy đủ Email và Mật khẩu!");
                 request.getRequestDispatcher("/customer/signin.jsp").forward(request, response);
-                return; 
+                return;
             }
 
             // Dọn dẹp khoảng trắng dư thừa do copy/paste ở ô email
@@ -56,7 +56,7 @@ public class SigninController extends HttpServlet {
                 response.sendRedirect("MainController?action=viewDashBoard");
             }
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
             request.setAttribute("ERROR", "Hệ thống đang bảo trì hoặc gặp sự cố. Vui lòng thử lại sau!");
             request.getRequestDispatcher("/customer/signin.jsp").forward(request, response);
         }
