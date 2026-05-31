@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dao;
 
 import dto.Customer;
@@ -43,7 +40,7 @@ public class CustomerDAO {
                         + "t.PriorityLevel, "
                         + "t.BookingWindowDays "
                         + "FROM Customers c " + "JOIN CustomerTiers t " + "ON c.TierID = t.TierID " 
-                        + "WHERE c.Email = ? " + "AND c.PasswordHash = ?";
+                        + "WHERE c.Email = ? " + "AND c.Password = ?";
 
                 // Step 3
                 st = cn.prepareStatement(sql);
