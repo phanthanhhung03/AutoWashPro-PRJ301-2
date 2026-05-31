@@ -3,7 +3,15 @@
     Created on : May 30, 2026, 2:16:01 PM
     Author     : Asus
 --%>
-
+<%
+    if (session.getAttribute("USER") != null) {
+        response.sendRedirect(
+                request.getContextPath()
+                + "/MainController?action=viewDashBoard"
+        );
+        return;
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +24,10 @@
               href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
-
+        <%
+            System.out.println("LANDING PAGE EXECUTED");
+            System.out.println("LANDING USER = " + session.getAttribute("USER"));
+        %>
         <!-- 1. NAVIGATION -->
         <header class="site-header">
             <div class="site-header__container main-wrapper">
@@ -32,11 +43,7 @@
                 </nav>
                 <div class="site-header__actions">
                     <a href="${pageContext.request.contextPath}/MainController?action=viewSignIn" class="btn btn--secondary btn--sm">Sign In</a>
-                    <form action="${pageContext.request.contextPath}/MainController" 
-                        method="POST" style="display:inline;">
-                        <input type="hidden" name="action" value="viewSignUp">
-                        <button type="submit" class="btn btn--primary btn--sm">Sign Up</button>
-                    </form>
+                    <a href="${pageContext.request.contextPath}/MainController?action=viewSignUp" class="btn btn--primary btn--sm">Sign Up</a>
                 </div>
             </div>
         </header>
@@ -52,11 +59,7 @@
                     Experience a high-end car wash platform with smart vehicle scheduling, interactive loyalty point tier rewards, and precision cleaning techniques.
                 </p>
                 <div class="hero-section__actions">
-                    <form action="${pageContext.request.contextPath}/MainController" 
-                        method="POST" style="display:inline;">
-                        <input type="hidden" name="action" value="viewSignUp">
-                        <button type="submit" class="btn btn--gold">Explore Memberships</button>
-                    </form>
+                    <a href="${pageContext.request.contextPath}/MainController?action=viewSignUp" class="btn btn--gold">Explore Memberships</a>
                     <a href="#features" class="btn btn--secondary">Learn More</a>
                 </div>
             </div>
@@ -159,11 +162,10 @@
                             <li class="tier-card__item">Track booking history</li>
                         </ul>
 
-                        <form action="${pageContext.request.contextPath}/MainController" 
-                            method="POST" style="display:inline;">
-                            <input type="hidden" name="action" value="viewSignUp">
-                            <button type="submit" class="btn btn--secondary btn--block">Get Started</button>
-                        </form>
+                        <a href="${pageContext.request.contextPath}/MainController?action=viewSignUp"
+                           class="btn btn--secondary btn--block">
+                            Get Started
+                        </a>
                     </div>
 
                     <!-- Silver -->
@@ -180,11 +182,10 @@
                             <li class="tier-card__item">Faster Service Queue</li>
                         </ul>
 
-                        <form action="${pageContext.request.contextPath}/MainController" 
-                            method="POST" style="display:inline;">
-                            <input type="hidden" name="action" value="viewSignUp">
-                            <button type="submit" class="btn btn--secondary btn--block">Join Silver</button>
-                        </form>
+                        <a href="${pageContext.request.contextPath}/MainController?action=viewSignUp"
+                           class="btn btn--secondary btn--block">
+                            Join Silver
+                        </a>
                     </div>
 
                     <!-- Gold -->
@@ -201,11 +202,10 @@
                             <li class="tier-card__item">Exclusive Gold Rewards</li>
                         </ul>
 
-                        <form action="${pageContext.request.contextPath}/MainController" 
-                            method="POST" style="display:inline;">
-                            <input type="hidden" name="action" value="viewSignUp">
-                            <button type="submit" class="btn btn--secondary btn--block">Join Gold</button>
-                        </form>
+                        <a href="${pageContext.request.contextPath}/MainController?action=viewSignUp"
+                           class="btn btn--primary btn--block">
+                            Join Gold
+                        </a>
                     </div>
 
                     <!-- Platinum -->
@@ -223,11 +223,10 @@
                             <li class="tier-card__item">Exclusive Promotions & Rewards</li>
                         </ul>
 
-                        <form action="${pageContext.request.contextPath}/MainController" 
-                            method="POST" style="display:inline;">
-                            <input type="hidden" name="action" value="viewSignUp">
-                            <button type="submit" class="btn btn--gold btn--block">Join Platinum</button>
-                        </form>
+                        <a href="${pageContext.request.contextPath}/MainController?action=viewSignUp"
+                           class="btn btn--gold btn--block">
+                            Join Platinum
+                        </a>
                     </div>
 
                 </div>
@@ -292,11 +291,7 @@
                 <div class="cta-card glass-panel">
                     <h2 class="cta-card__title">Elevate Your Automotive Care</h2>
                     <p class="cta-card__desc">Join thousands of members who enjoy premium, hassle-free detailing services on demand.</p>
-                    <form action="${pageContext.request.contextPath}/MainController" 
-                            method="POST" style="display:inline;">
-                            <input type="hidden" name="action" value="viewSignUp">
-                            <button type="submit" class="btn btn--primary">Get Started Now</button>
-                    </form>
+                    <a href="${pageContext.request.contextPath}/MainController?action=viewSignUp" class="btn btn--primary">Get Started Now</a>
                 </div>
             </div>
         </section>
@@ -321,12 +316,7 @@
                         <h4 class="site-footer__section-title">Customer Care</h4>
                         <ul class="site-footer__list">
                             <li><a href="${pageContext.request.contextPath}/MainController?action=viewSignIn" class="site-footer__link">Sign In</a></li>
-                            <li><form action="${pageContext.request.contextPath}/MainController" 
-                                    method="POST" style="display:inline;">
-                                    <input type="hidden" name="action" value="viewSignUp">
-                                    <button type="submit" class="site-footer__link">Sign Up</button>
-                                </form>
-                            </li>
+                            <li><a href="${pageContext.request.contextPath}/MainController?action=viewSignUp" class="site-footer__link">Sign Up</a></li>
                             <li><a href="#" class="site-footer__link">Support Portal</a></li>
                         </ul>
                     </div>
@@ -346,6 +336,13 @@
             </div>
         </footer>
 
+        <script>
+            window.addEventListener("pageshow", function (event) {
+                if (event.persisted) {
+                    location.reload();
+                }
+            });
+        </script>
     </body>
 </html>
 
