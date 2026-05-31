@@ -4,7 +4,6 @@ import dbutils.DBUtils;
 import dto.Customer;
 import dto.CustomerTier;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -82,8 +81,6 @@ public class CustomerDAO {
                 st.setString(2, password);
 
                 // Step 4
-                System.out.println("DAO EMAIL = [" + email + "]");
-                System.out.println("DAO PASSWORD = [" + password + "]");
                 table = st.executeQuery();
 
                 if (table.next()) {

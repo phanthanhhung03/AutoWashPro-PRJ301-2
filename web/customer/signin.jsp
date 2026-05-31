@@ -1,5 +1,4 @@
 <%-- Document : siignin Created on : May 30, 2026, 2:26:57 PM Author : Asus --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +20,7 @@
     </head>
 
     <body>
-
+        
         <main class="main-wrapper main-wrapper--narrow">
             <div class="auth-card glass-panel">
 
@@ -108,6 +107,13 @@
             </div>
         </main>
 
+        <script>
+            window.addEventListener("pageshow", function (event) {
+                if (event.persisted) {
+                    location.reload();
+                }
+            });
+        </script>
     </body>
 
 </html>

@@ -96,7 +96,7 @@
               href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
-
+        
         <!-- NAVIGATION -->
         <header class="site-header">
             <div class="site-header__container main-wrapper">
