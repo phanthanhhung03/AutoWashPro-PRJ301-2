@@ -51,6 +51,10 @@ public class MainController extends HttpServlet {
             case "logout":
                 url = "/LogoutController"; 
                 break;
+            
+            case "signUp":
+                url = "SignupController";
+                break;
                 
             case "viewDashBoard":
                 url = "/customer/dashboard.jsp";
