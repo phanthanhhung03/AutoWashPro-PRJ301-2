@@ -33,6 +33,12 @@ public class MainController extends HttpServlet {
         switch (action) {
 
             case "viewSignIn":
+                if (request.getSession().getAttribute("USER") != null) {
+                    response.sendRedirect(
+                            "MainController?action=viewDashBoard");
+                    return;
+                }
+
                 url = "/customer/signin.jsp";
                 break;
 
@@ -41,6 +47,20 @@ public class MainController extends HttpServlet {
                 break;
 
             case "landing":
+
+                System.out.println(
+                        "LANDING CONTROLLER USER = "
+                        + request.getSession().getAttribute("USER")
+                );
+
+                if (request.getSession().getAttribute("USER") != null) {
+                    System.out.println("REDIRECT FROM LANDING");
+
+                    response.sendRedirect(
+                            "MainController?action=viewDashBoard");
+                    return;
+                }
+
                 url = "/customer/landing-page.jsp";
                 break;
 

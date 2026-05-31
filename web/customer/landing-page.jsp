@@ -3,7 +3,15 @@
     Created on : May 30, 2026, 2:16:01 PM
     Author     : Asus
 --%>
-
+<%
+    if (session.getAttribute("USER") != null) {
+        response.sendRedirect(
+                request.getContextPath()
+                + "/MainController?action=viewDashBoard"
+        );
+        return;
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +24,10 @@
               href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
-
+        <%
+            System.out.println("LANDING PAGE EXECUTED");
+            System.out.println("LANDING USER = " + session.getAttribute("USER"));
+        %>
         <!-- 1. NAVIGATION -->
         <header class="site-header">
             <div class="site-header__container main-wrapper">
@@ -325,6 +336,13 @@
             </div>
         </footer>
 
+        <script>
+            window.addEventListener("pageshow", function (event) {
+                if (event.persisted) {
+                    location.reload();
+                }
+            });
+        </script>
     </body>
 </html>
 
