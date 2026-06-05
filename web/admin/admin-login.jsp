@@ -37,20 +37,31 @@
                     Authorized Personnel Only
                 </p>
 
-                <form action="admin-dashboard.html" method="GET">
-                    <!-- Email field -->
+                <% if (request.getAttribute("ERROR") != null) {%>
+                <div class="auth-card__alert auth-card__alert--error">
+                    &#9888; <%= request.getAttribute("ERROR")%>
+                </div>
+                <% }%>
+
+                <form action="${pageContext.request.contextPath}/MainController" method="POST">
+                    <input type="hidden" name="action" value="adminSignInProcess">
+
                     <div class="form-group">
                         <label for="admin-email" class="form-group__label">Staff Email</label>
-                        <input type="email" id="admin-email" class="form-group__input" placeholder="id@autowashpro.jp" required autocomplete="email">
+                        <input type="email" id="admin-email" class="form-group__input" 
+                               name="email" value="${param.email}"
+                               placeholder="id@autowashpro.jp" autocomplete="email" 
+                               required="">
                     </div>
 
-                    <!-- Password field -->
                     <div class="form-group">
                         <label for="admin-password" class="form-group__label">Password</label>
-                        <input type="password" id="admin-password" class="form-group__input" placeholder="••••••••" required autocomplete="current-password">
+                        <input type="password" id="admin-password" class="form-group__input" 
+                               name="password"
+                               placeholder="••••••••" autocomplete="current-password"
+                               required="">
                     </div>
 
-                    <!-- Submit Button -->
                     <button type="submit" class="btn btn--primary btn--block" style="background-color: var(--color-accent-blue); box-shadow: var(--glow-blue);">
                         Sign In to Ops Desk
                     </button>
