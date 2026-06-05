@@ -6,6 +6,8 @@ import dto.CustomerTier;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -45,6 +47,8 @@ public class CustomerDAO {
         }
         return result;
     }
+
+    private static final Map<Integer, CustomerTier> tierMap = new HashMap<>();
 
     public Customer getCustomer(String email, String password) {
         Customer result = null;
@@ -86,15 +90,25 @@ public class CustomerDAO {
                 if (table.next()) {
 
                     // Create Tier Object
-                    CustomerTier tier = new CustomerTier();
-                    tier.setTierID(table.getInt("TierID"));
-                    tier.setTierName(table.getString("TierName"));
-                    tier.setMinBookings(table.getInt("MinBookings"));
-                    tier.setMinSpend(table.getDouble("MinSpend"));
-                    tier.setPointMultiplier(table.getDouble("PointMultiplier"));
-                    tier.setDiscountPercent(table.getDouble("DiscountPercent"));
-                    tier.setPriorityLevel(table.getInt("PriorityLevel"));
-                    tier.setBookingWindowDays(table.getInt("BookingWindowDays"));
+                    int tierID = table.getInt("TierID");
+
+                    CustomerTier tier = tierMap.get(tierID);
+
+                    if (tier == null) {
+
+                        tier = new CustomerTier();
+
+                        tier.setTierID(tierID);
+                        tier.setTierName(table.getString("TierName"));
+                        tier.setMinBookings(table.getInt("MinBookings"));
+                        tier.setMinSpend(table.getDouble("MinSpend"));
+                        tier.setPointMultiplier(table.getDouble("PointMultiplier"));
+                        tier.setDiscountPercent(table.getDouble("DiscountPercent"));
+                        tier.setPriorityLevel(table.getInt("PriorityLevel"));
+                        tier.setBookingWindowDays(table.getInt("BookingWindowDays"));
+
+                        tierMap.put(tierID, tier);
+                    }
 
                     // Create Customer Object
                     result = new Customer();
