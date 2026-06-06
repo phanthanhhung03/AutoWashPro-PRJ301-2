@@ -294,4 +294,29 @@ public class CustomerDAO {
         }
         return result;
     }
+
+    public int countCustomers() {
+        int total = 0;
+        Connection cn = null;
+        PreparedStatement st = null;
+        ResultSet table = null;
+        try {
+            cn = dbutils.DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Customer";
+                st = cn.prepareStatement(sql);
+                table = st.executeQuery();
+                if(table.next()){
+                    total = table.getInt(1);
+                }
+                table.close();
+                st.close();
+                cn.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
 }
