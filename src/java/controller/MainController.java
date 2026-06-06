@@ -85,7 +85,7 @@ public class MainController extends HttpServlet {
                 break;
 
             case "viewAdminDashboard":
-                url = "/admin/admin-dashboard.jsp";
+                url = "/AdminDashboardController";
                 break;
 
             default:

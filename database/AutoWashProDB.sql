@@ -69,7 +69,7 @@ CREATE TABLE Customers
 
     Address NVARCHAR(255),
 
-    TierID INT DEFAULT 1,
+    TierID INT NOT NULL,
 
     CurrentPoints INT DEFAULT 0,
 
@@ -109,6 +109,8 @@ CREATE TABLE Vehicles
     Color NVARCHAR(30),
 
     CreatedAt DATETIME DEFAULT GETDATE(),
+
+    Status BIT NOT NULL DEFAULT 1,
 
     CONSTRAINT FK_Vehicles_Customers
     FOREIGN KEY (CustomerID)
