@@ -73,7 +73,19 @@ public class MainController extends HttpServlet {
                 break;
 
             case "viewAdminSignIn":
+                if (request.getSession().getAttribute("ADMIN_USER") != null) {
+                    response.sendRedirect("MainController?action=viewAdminDashboard");
+                    return;
+                }
                 url = "/admin/admin-login.jsp";
+                break;
+
+            case "adminSignInProcess":              
+                url = "/AdminSigninController";
+                break;
+
+            case "viewAdminDashboard":
+                url = "/admin/admin-dashboard.jsp";
                 break;
 
             default:
