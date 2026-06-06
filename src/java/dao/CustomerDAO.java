@@ -23,8 +23,8 @@ public class CustomerDAO {
             cn = DBUtils.getConnection();
             if (cn != null) {
                 //buoc 2 : viet sql
-                String sql = "insert dbo.Customers([FullName], [PhoneNumber], [Email], [Password], [Address])\n"
-                        + "values(?, ?, ?, ?, ?)";
+                String sql = "insert dbo.Customers([FullName], [PhoneNumber], [Email], [Password], [Address], [TierID])\n"
+                        + "values(?, ?, ?, ?, ?, 1)";
                 PreparedStatement st = cn.prepareStatement(sql);
                 st.setString(1, c.getFullName());
                 st.setString(2, c.getPhoneNumber());

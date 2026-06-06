@@ -65,7 +65,7 @@ public class MainController extends HttpServlet {
                 break;
 
             case "signUp":
-                url = "SignupController";
+                url = "/SignupController";
                 break;
 
             case "viewDashBoard":
