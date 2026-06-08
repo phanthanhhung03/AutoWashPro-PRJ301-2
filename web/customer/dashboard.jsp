@@ -5,12 +5,27 @@
 --%>
 
 <%@page import="dto.Customer"%>
+<%@page import="dto.Vehicle"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <%
     Customer user = (Customer) session.getAttribute("USER");
+    List<Vehicle> vehiclesList = (List<Vehicle>) session.getAttribute("vehicleList");
     boolean isMaxTier
             = (Boolean) request.getAttribute("isMaxTier");
+
+    String successMessage
+            = (String) session.getAttribute(
+                    "SUCCESS_MESSAGE");
+
+    request.setAttribute(
+            "SUCCESS_MESSAGE",
+            successMessage);
+
+    session.removeAttribute(
+            "SUCCESS_MESSAGE");
 %>
 
 <!DOCTYPE html>
@@ -23,6 +38,22 @@
               href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
+
+        <% if (request.getAttribute("SUCCESS_MESSAGE") != null) {%>
+
+        <div id="success-toast"
+             class="toast toast--success">
+
+            <span class="toast__icon">✓</span>
+
+            <span class="toast__message">
+                <%= request.getAttribute("SUCCESS_MESSAGE")%>
+            </span>
+
+        </div>
+
+        <% }%>
+
 
         <!-- NAVIGATION -->
         <header class="site-header">
@@ -164,42 +195,68 @@
                 </div>
 
                 <div class="grid-cols-3">
-                    <!-- Vehicle 1 -->
+
+                    <% if (vehiclesList == null || vehiclesList.isEmpty()) { %>
+
+                    <div class="vehicle-empty glass-panel">
+
+                        <div class="vehicle-empty__icon">
+                            🚗
+                        </div>
+
+                        <h3 class="vehicle-empty__title">
+                            No Vehicles Registered
+                        </h3>
+
+                        <p class="vehicle-empty__description">
+                            Add your first vehicle to start booking premium wash services.
+                        </p>
+
+                    </div>
+
+                    <% } %>
+
+                    <% if (vehiclesList != null) { %>    
+                    <% for (Vehicle vehicle : vehiclesList) {%>
                     <div class="vehicle-card glass-panel">
                         <div class="vehicle-card__header">
                             <div>
-                                <span class="vehicle-card__type">Primary Coupe</span>
-                                <h3 class="vehicle-card__name">Nissan GT-R Nismo</h3>
+                                <span class="vehicle-card__type">
+                                    <%= vehicle.getBrand()%>
+                                </span>
+                                <h3 class="vehicle-card__name">
+                                    <%= vehicle.getModel()%>
+                                </h3>
+                                <span class="vehicle-card__color">
+                                    <%= vehicle.getColor()%>
+                                </span>
                             </div>
                             <span class="status-badge status-badge--completed">Active</span>
                         </div>
-                        <span class="vehicle-card__plate">品川 300 輪 23-45</span>
+                        <span class="vehicle-card__plate"><%= vehicle.getLicensePlate()%></span>
                         <div class="vehicle-card__actions">
                             <a href="#" class="btn btn--secondary btn--sm">Detail Log</a>
                             <a href="#" class="btn btn--primary btn--sm">Book Wash</a>
                         </div>
                     </div>
-                    <!-- Vehicle 2 -->
-                    <div class="vehicle-card glass-panel">
-                        <div class="vehicle-card__header">
-                            <div>
-                                <span class="vehicle-card__type">Executive Sedan</span>
-                                <h3 class="vehicle-card__name">Lexus LS 500h</h3>
-                            </div>
-                            <span class="status-badge status-badge--completed">Active</span>
-                        </div>
-                        <span class="vehicle-card__plate">足立 330 す 78-90</span>
-                        <div class="vehicle-card__actions">
-                            <a href="#" class="btn btn--secondary btn--sm">Detail Log</a>
-                            <a href="#" class="btn btn--primary btn--sm">Book Wash</a>
-                        </div>
-                    </div>
+                    <% } %>
+                    <% }%>
+
                     <!-- Add New Vehicle Card -->
-                    <div class="vehicle-card vehicle-card--add-new glass-panel">
-                        <div class="vehicle-card__add-icon">+</div>
-                        <span style="font-weight:600; color:var(--color-text-primary);">Add New Vehicle</span>
-                        <span style="font-size:0.8rem; color:var(--color-text-tertiary);">Register vehicle plate & model</span>
-                    </div>
+                    <a href="${pageContext.request.contextPath}/MainController?action=viewAddVehicle"
+                       class="vehicle-card vehicle-card--add-new glass-panel">
+
+                        <span class="vehicle-card__add-icon">+</span>
+
+                        <span class="vehicle-card__add-title">
+                            Add New Vehicle
+                        </span>
+
+                        <span class="vehicle-card__add-description">
+                            Register vehicle plate & model
+                        </span>
+
+                    </a>
                 </div>
             </section>
 
@@ -392,6 +449,30 @@
             </div>
         </footer>
 
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                const toast =
+                        document.getElementById("success-toast");
+
+                if (!toast) {
+                    return;
+                }
+
+                setTimeout(() => {
+
+                    toast.classList.add(
+                            "toast--hide");
+
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 500);
+
+                }, 3000);
+
+            });
+        </script>
     </body>
 </html>
 

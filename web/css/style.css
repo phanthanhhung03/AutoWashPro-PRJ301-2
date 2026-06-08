@@ -1905,3 +1905,141 @@ body::after {
         gap: var(--spacing-sm);
     }
 }
+
+/* Select Support */
+
+.form-group__select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    cursor: pointer;
+}
+
+.form-group__select:focus {
+    outline: none;
+}
+
+.form-group__select option {
+    background: #1c1c21;
+    color: #ffffff;
+}
+
+/* =========================
+   Toast Notification
+   ========================= */
+
+.toast {
+    position: fixed;
+
+    top: 80px;
+    right: 24px;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    border-radius: 999px;
+
+    width: fit-content;
+    max-width: 240px;
+
+    backdrop-filter: blur(16px);
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+.toast--success {
+
+    background:
+        rgba(8, 25, 18, 0.95);
+
+    border:
+        1px solid rgba(0, 255, 170, 0.20);
+
+    color:
+        #69ffb9;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.toast__icon {
+    font-size: 0.95rem;
+}
+
+.toast__message {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.toast--hide {
+    opacity: 0;
+    transform: translateX(40px);
+}
+
+@keyframes toast-slide-in {
+
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =========================
+   Empty Vehicle State
+   ========================= */
+
+.vehicle-empty {
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    min-height: 240px;
+
+    padding: 2rem;
+
+    border: 1px dashed var(--color-border);
+}
+
+.vehicle-empty__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+
+    opacity: 0.8;
+}
+
+.vehicle-empty__title {
+    margin: 0;
+
+    color: var(--color-text-primary);
+
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.vehicle-empty__description {
+    margin-top: 0.75rem;
+
+    color: var(--color-text-secondary);
+
+    max-width: 400px;
+
+    line-height: 1.6;
+}

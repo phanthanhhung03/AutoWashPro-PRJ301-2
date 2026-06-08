@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,6 +48,7 @@
 
                 <form action="MainController" method="POST">
 
+                    <!-- License Plate -->
                     <div class="form-group">
                         <label class="form-group__label">
                             License Plate
@@ -58,24 +59,43 @@
                                    name="licensePlate"
                                    class="form-group__input"
                                    placeholder="51A-12345"
-                                   required>
+                                   required
+                                   maxlength="15"
+                                   pattern="[0-9]{2}[A-Z][0-9]?-[0-9]{4,5}"
+                                   title="Example: 51A-12345 or 59A1-12345">
                         </div>
                     </div>
 
+                    <!-- Brand -->
                     <div class="form-group">
                         <label class="form-group__label">
                             Brand
                         </label>
 
                         <div class="form-group__input-wrapper">
-                            <input type="text"
-                                   name="brand"
-                                   class="form-group__input"
-                                   placeholder="Toyota"
-                                   required>
+                            <select name="brand"
+                                    class="form-group__input form-group__select"
+                                    required>
+
+                                <option value="">Select Brand</option>
+
+                                <option value="Toyota">Toyota</option>
+                                <option value="Honda">Honda</option>
+                                <option value="Mazda">Mazda</option>
+                                <option value="Hyundai">Hyundai</option>
+                                <option value="Kia">Kia</option>
+                                <option value="Ford">Ford</option>
+                                <option value="BMW">BMW</option>
+                                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                <option value="Audi">Audi</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="VinFast">VinFast</option>
+
+                            </select>
                         </div>
                     </div>
 
+                    <!-- Model -->
                     <div class="form-group">
                         <label class="form-group__label">
                             Model
@@ -86,24 +106,45 @@
                                    name="model"
                                    class="form-group__input"
                                    placeholder="Vios"
-                                   required>
+                                   required
+                                   maxlength="50">
                         </div>
                     </div>
 
+                    <!-- Color -->
                     <div class="form-group">
                         <label class="form-group__label">
                             Color
                         </label>
 
                         <div class="form-group__input-wrapper">
-                            <input type="text"
-                                   name="color"
-                                   class="form-group__input"
-                                   placeholder="White"
-                                   required>
+                            <select name="color"
+                                    class="form-group__input form-group__select"
+                                    required>
+
+                                <option value="">Select Color</option>
+
+                                <option value="White">White</option>
+                                <option value="Black">Black</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Gray">Gray</option>
+                                <option value="Red">Red</option>
+                                <option value="Blue">Blue</option>
+                                <option value="Green">Green</option>
+                                <option value="Yellow">Yellow</option>
+
+                            </select>
                         </div>
                     </div>
 
+                    <!-- OCR Future Feature -->
+                    <button type="button"
+                            class="btn btn--secondary btn--block"
+                            style="margin-bottom:12px;">
+                        📷 Scan Vehicle Registration
+                    </button>
+
+                    <!-- Submit -->
                     <button type="submit"
                             class="btn btn--primary btn--block"
                             name="action"
